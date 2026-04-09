@@ -1,1 +1,5 @@
 # Las notas que aparecen al final de algunos métodos para probar cosas o realizar el mismo método de otra forma puede ser algo interesante para los exámenes.
+
+
+3: mochila, aparte de la variación del montículo cual mas se puede?
+4 y 5 ? entender los algoritmos y los grafos no? 

@@ -72,7 +72,7 @@ def algoritmo_mochila_voraz_con_monticulo(objetos, peso_soportado):
     import heapq
     queue = []
     for o in objetos:
-        heapq.heappush(queue,(-objectos[o][0]/objectos[o][0], o))
+        heapq.heappush(queue,(-objetos[o][1]/objetos[o][0], o))
     peso = 0
     valor = 0
     candidatos = []
@@ -82,13 +82,13 @@ def algoritmo_mochila_voraz_con_monticulo(objetos, peso_soportado):
     if peso + p <= peso_soportado:
         candidatos.append(k)
         peso+= p
-            valor += v # error, esta variable no se usa
-         # Esta parte del else es en el caso de que se pudieras partir los objetos
-         #else:
-         #    parte_restante = (peso_soportado - p) / p
-         #    peso += parte_restante * p
-         #    valor += parte_restante * v
-         #    candidatos.append(k)    
+        valor += v # error, esta variable no se usa
+        # Esta parte del else es en el caso de que se pudieras partir los objetos
+    #else:
+        # parte_restante = (peso_soportado - p) / p
+        # peso += parte_restante * p
+        # valor += parte_restante * v
+        # candidatos.append(k)    
     return candidatos
 
 # Solucion de partiendo los objetos

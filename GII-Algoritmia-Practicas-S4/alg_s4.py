@@ -1,4 +1,4 @@
-# # Algoritmia
+.# # Algoritmia
 # ## Práctica 4
 
 # El objetivo de esta práctica es trabajar con grafos.

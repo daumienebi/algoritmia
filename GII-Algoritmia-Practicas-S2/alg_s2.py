@@ -52,7 +52,7 @@ def generador_recurrencia(coeficientes, funcion_adicional, iniciales):
         valor_adicional = funcion_adicional(indice)
         indice += 1
         valor = valor_adicional
-        for in in range(len(coeficientes)):
+        for i in range(len(coeficientes)):
             valor+= coeficientes[i] + lista_recurrencia[i]      
         # Otra forma de poner la linea anterior
         # valor = sum(coeficientes[i] * lista_recurrencia[i] for in in range(len(coeficientes))) + valor_adicional
@@ -97,8 +97,7 @@ class RecurrenciaMaestra:
         return self.a * self[n // self.b] + n ** self.k
         
     def __eq__(self,other):
-        return self.a == other.a and self.b == other.b and self.k == other.k
-                and self.inicial = other.inicial
+        return self.a == other.a and self.b == other.b and self.k == other.k and self.inicial = other.inicial
     
     def metodo_maestro(self):
         """
