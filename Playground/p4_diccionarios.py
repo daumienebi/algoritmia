@@ -1,18 +1,6 @@
-# # Algoritmia
-# ## Práctica 4
-
-# El objetivo de esta práctica es trabajar con grafos.
-# Se pide la implementación de las funciones que aparecen a continuación. 
-
-# En el cuerpo de cada función hay una instrucción "pass", se debe sustituir por la implementación adecuada. 
-
-# Para cada clase o función que se pide se proporcionan algunos tests. Las implementaciones deberían superar estos tests.
-
-# El grafo se puede representar como un diccionario de diccionarios o como una matriz de adyacencia.
-# Para esta práctica se usará la representación de diccionario de diccionarios.
-
-# NOTA: Los grafos son dirigidos y pesados.
-
+import heapq
+# Implementación de esta practica utilizando la representación de diccionario de 
+# diccionarios
 grafo_de_ejemplo = {
         'a': {'b': 1, 'c': 2},
         'b': {'a': 3, 'd': 6},
@@ -263,3 +251,4 @@ grado = grado(grafo_de_ejemplo,'d',False)
 print(f'Grado: {grado}')
 pesos_adya = pesos_adyacentes(grafo_de_ejemplo,'a',True)
 print(f'Pesos adya: {pesos_adya}')
+

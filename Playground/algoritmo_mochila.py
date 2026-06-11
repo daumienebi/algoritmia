@@ -7,22 +7,24 @@ def mochila_entera_lista(objetos,peso_soportado):
     # Creo mi lista de ratios donde almacenare tuplas con la relacion entre los
     # pesos y valores de cada objeto
     lista_ratios = []
-
-    for id_objeto, dato in objetos.items():
-        peso = dato[0]
-        valor = dato[1]
+    for clave, (peso,valor) in objetos.items():
         ratio = valor / peso
-        lista_ratios.append((ratio,id_objeto,peso,valor))
-    
+        lista_ratios.append((ratio,clave,peso,valor))
     # Ordenamos la lista de mayor a menor para tener los mejores elementos en la cima
     lista_ratios.sort(reverse= True)
+
+    # Otra forma de obtener los elementos y ordenarlos
+    #for k, (p,v) in objetos.items():
+        #lista_ratios.append((k, p, v))
+    #lista = sorted(lista_ratios, key = lambda obj: obj[2]/obj[1], reverse=True)
+
     peso_actual = 0
     mochila_resultado = []
 
-    for ratio,id_objeto,peso,valor in lista_ratios:
+    for ratio,clave,peso,valor in lista_ratios:
         # Metemos el objeto si cabe entero
         if peso_actual + peso <= peso_soportado:
-            mochila_resultado.append(id_objeto)
+            mochila_resultado.append(clave)
             peso_actual+= peso
     return mochila_resultado
 
@@ -32,11 +34,9 @@ def mochila_entera_monticulo(objetos,peso_soportado):
 
     # metemos los valores en el monticulo, almacenando tuplas con la relacion entre los 
     # pesos y valores de cada objeto
-    for id_objeto, dato in objetos.items():
-        peso = dato[0]
-        valor = dato[1]
+    for clave, (peso,valor) in objetos.items():
         ratio = valor / peso
-        heapq.heappush(max_heap,(-ratio,id_objeto,peso,valor))
+        heapq.heappush(max_heap,(-ratio,clave,peso,valor))
     
     peso_actual = 0
     mochila_resultado = []
@@ -45,10 +45,10 @@ def mochila_entera_monticulo(objetos,peso_soportado):
         # Obtenemos cada objeto
         objeto = heapq.heappop(max_heap)
         peso = objeto[2]
-        id_objeto = objeto[1]
+        clave = objeto[1]
         # Metemos el objeto si cabe entero
         if peso_actual + peso <= peso_soportado:
-            mochila_resultado.append(id_objeto) # Agregamos solamente el id o nombre del objeto
+            mochila_resultado.append(clave) # Agregamos la clave nombre del objeto
             peso_actual+= peso
     return mochila_resultado
 
@@ -57,11 +57,9 @@ def mochila_fraccionada_lista(objetos,peso_soportado):
     # pesos y valores de cada objeto
     lista_ratios = []
 
-    for id_objeto, dato in objetos.items():
-        peso = dato[0]
-        valor = dato[1]
+    for clave, (peso,valor) in objetos.items():
         ratio = valor / peso
-        lista_ratios.append((ratio,id_objeto,peso,valor))
+        lista_ratios.append((ratio,clave,peso,valor))
     
     # Ordenamos la lista de mayor a menor para tener los mejores elementos en la cima
     lista_ratios.sort(reverse= True)
@@ -70,17 +68,17 @@ def mochila_fraccionada_lista(objetos,peso_soportado):
     # valor el porcentaje cogido
     mochila_resultado = {}
     
-    for ratio,id_objeto,peso,valor in lista_ratios:
+    for ratio,clave,peso,valor in lista_ratios:
         # Lo metemos si cabe entero
         if peso_actual + peso <= peso_soportado:
-            mochila_resultado[id_objeto] = 1.0 # si lo metemos entero
+            mochila_resultado[clave] = 1.0 # si lo metemos entero
             peso_actual+= peso
         # Si no cabe entero, tenemos que partirlo
         else:
             espacio_restante = peso_soportado - peso_actual
             # La proporcion que podemos meter es la siguiente:
             fraccion = espacio_restante / peso
-            mochila_resultado[id_objeto] = round(fraccion,2)
+            mochila_resultado[clave] = round(fraccion,2)
             peso_actual+= espacio_restante
             # Ahora rompemos el bucle dado que la mochila ya se llenó
             break
@@ -90,11 +88,9 @@ def mochila_fraccionada_lista(objetos,peso_soportado):
 def mochila_fraccionada_monticulo(objetos,peso_soportado):
     max_heap = []
 
-    for id_objeto, dato in objetos.items():
-        peso = dato[0]
-        valor = dato[1]
+    for clave, (peso,valor) in objetos.items():
         ratio = valor / peso
-        heapq.heappush(max_heap,(-ratio,id_objeto,peso,valor))
+        heapq.heappush(max_heap,(-ratio,clave,peso,valor))
     
     peso_actual = 0
     mochila_resultado = {}
@@ -103,23 +99,23 @@ def mochila_fraccionada_monticulo(objetos,peso_soportado):
         # Obtenemos cada uno de los objetos
         objeto = heapq.heappop(max_heap)
         peso = objeto[2]
-        id_objeto = objeto[1]
+        clave = objeto[1]
         # Si el objeto cabe entero, lo metemos
         if peso_actual + peso < peso_soportado:
-            mochila_resultado[id_objeto] = 1.0
+            mochila_resultado[clave] = 1.0
             peso_actual+= peso
         # Si no cabe entero, lo partimos
         else:
             espacio_restante = peso_soportado - peso_actual
             # Calculamos la porción que podemos meter
             fraccion = espacio_restante / peso
-            mochila_resultado[id_objeto] = round(fraccion,2)
+            mochila_resultado[clave] = round(fraccion,2)
             peso_actual+= espacio_restante
             break
     return mochila_resultado
 
-# ZONA DE PRUEBA: MOCHILA 0/1 (OBJETOS ENTEROS)
 
+# ZONA DE PRUEBA: MOCHILA 0/1 (OBJETOS ENTEROS)
 # Definimos el botín: { 'Nombre': (Peso, Valor) }
 botin_museo = {
     'Anillo de Diamante': (1, 200),  # Ratio: 200 €/kg

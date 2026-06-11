@@ -59,3 +59,7 @@ def quicksort(sequencia, key_function, reverse):
 # Sugerencia: Comprueba formalmente y experimentalmente los tiempos de ordenación de los algoritmos para conjuntos ya ordenados, conjuntos ordenados en orden inverso y conjuntos aleatorios.
 
 # Sugerencia: Prueba los tiempos comparando tu implementación con la del Timsort incluida en la función sorted de Python.
+
+# Sugerencia: Implementa los algoritmos utilizando tanto los indicecs (tal como sale en los apuntes de teoria) como creando listas nueva.
+#             La opcion primeria es más rapida y permite trabajar sobre la lista original, la segunda implica que no se modifica
+#             la lista original.
